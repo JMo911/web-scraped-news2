@@ -11,6 +11,20 @@ class App extends React.Component {
     fetch('/scrape').then(response => response.json()).then(response => this.setState({articles: response}))
   }
 
+  saveArticle = () => {
+    fetch('/savearticle', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstParam: 'yourValue',
+        secondParam: 'yourOtherValue',
+      })
+    })
+  }
+
   render() {
     return (
       // gamePlay = {((e) => this.handleClick(e, id))}
@@ -25,7 +39,8 @@ class App extends React.Component {
           key={index}
           title={title}
           summary = {summary}
-          href = {href}>
+          href = {href}
+          saveArticle = {(() => this.saveArticle())}>
           </ArticleCard>
         )
         ) : (

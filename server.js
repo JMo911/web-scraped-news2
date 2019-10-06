@@ -3,9 +3,38 @@ const app = express();
 const port = 3001;
 const axios = require('axios');
 const cheerio = require('cheerio')
+
+//MONGO SET UP
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/web-scraper-2', {useNewUrlParser: true});
+// const db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.once('open', function() {
+//   // we're connected!
+//   console.log('connected to ' + db)
+// });
+var db = require("./models");
+//END OF MONGO SET UP
+
 app.use(express.static('public'))
 
 app.get('/', (req, res) => res.send('Hello World!'))
+
+app.get('/savedarticles', (req, res) => {
+  db.Article.find({})
+    .then(function(dbArticle) {
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+})
+
+app.post('/savearticle', (req, res) => {
+  db.Article.create(req.body).then((dbArticle) => {
+    console.log(dbArticle)
+  })
+})
 
 app.get('/scrape', (req, res) => {
     axios.get('https://na.leagueoflegends.com/en/news/')
