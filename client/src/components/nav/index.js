@@ -2,6 +2,8 @@ import React from 'react';
 import { Nav, NavbarBrand, NavLink, Button } from 'reactstrap';
 
 export default class MyNav extends React.Component {
+  
+
   render() {
     return (
       <div>
@@ -9,7 +11,7 @@ export default class MyNav extends React.Component {
             <NavbarBrand href="/">LoL Feed</NavbarBrand>
             <NavLink href="/">Home</NavLink> 
             <NavLink href="#">Saved Articles</NavLink> 
-            <Button color="primary">Scrape New Articles</Button>{' '}
+            <Button color="primary" onClick={() => this.props.getArticles()}>Scrape New Articles</Button>{' '}
             <Button color="primary">Clear Articles</Button>{' '}
         </Nav>
       </div>
