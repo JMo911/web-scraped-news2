@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 3001;
 const axios = require('axios');
 const cheerio = require('cheerio')
 app.use(express.static('public'))
@@ -13,10 +13,6 @@ app.get('/scrape', (req, res) => {
     // handle success
     const $ = cheerio.load(response.data);
     const results = [];
-    // const title = $('#collection-world > div.css-4svvz1.ekkqrpp0 > section.css-18l1u7x.e46isfb1 > div.css-gfgt40.ekkqrpp1 > ol > li:nth-child(2) > article > div > h2 > a')
-    // result =  {
-    //     title: 'hello'
-    // }
     
     $('.node-article').each( (i, element) => {
         
