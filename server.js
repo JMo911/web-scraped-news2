@@ -19,13 +19,17 @@ app.get('/scrape', (req, res) => {
     // }
     
     $('.node-article').each( (i, element) => {
-        // #riot-101 > div.section-wrapper > div.section-wrapper-content > div > div > div > div.panelizer-view-mode.node.node-teaser.node-article.node-132478 > div > div > div > div.default-2-3 > h4 > a
-        const article = $(element).children().find('.default-2-3 > h4 > a').text();
+        
+        const title = $(element).children().find('.default-2-3 > h4 > a').text();
+        const summary = $(element).children().find('.teaser-content > div').text();
+        const href = $(element).children().find('.default-2-3 > h4 > a').attr('href');
         // const title = $(article).children().find('a').val();
 
         // $(element).children().find()
         results.push({
-            article: article
+            title: title,
+            summary: summary,
+            href: href
         })
     })
     res.send(results);
